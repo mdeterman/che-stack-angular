@@ -2,7 +2,8 @@ FROM eclipse/node
 
 LABEL che:server:4200:ref=ng-serve che:server:4200:protocol=http
 
-RUN sudo ssh -o StrictHostKeyChecking=no git@gitlab.com && \
+RUN mkdir -p $HOME/.ssh && \
+    ssh-keyscan github.com >> ~/.ssh/known_hosts && \
     sudo npm cache clean -f && \
     sudo npm install -g n && \
     sudo n stable && \
